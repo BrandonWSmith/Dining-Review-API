@@ -38,7 +38,7 @@ public class AdminController {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
-    return reviewRepository.findReviewsByStatus(reviewStatus);
+    return reviewRepository.findReviewsByReviewStatus(reviewStatus);
   }
 
   @PutMapping("/reviews/{id}")
@@ -67,7 +67,7 @@ public class AdminController {
   }
 
   private void updateRestaurantScores(Restaurant restaurant) {
-    List<Review> reviews = reviewRepository.findReviewsByRestaurantIdAndStatus(restaurant.getId(), ReviewStatus.ACCEPTED);
+    List<Review> reviews = reviewRepository.findReviewsByRestaurantIdAndReviewStatus(restaurant.getId(), ReviewStatus.ACCEPTED);
     if (reviews.size() == 0) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
